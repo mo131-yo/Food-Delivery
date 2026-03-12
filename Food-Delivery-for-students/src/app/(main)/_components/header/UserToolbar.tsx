@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import { UserContext } from "../../context";
-import { HeaderAddressSelectButton } from ".././header/HeaderAddressSelectButton";
-import { HeaderCartButton } from "..//header/HeaderCartButton";
-import { HeaderUserProfileIcon } from "..//header/HeaderUserProfileIcon";
-import HeaderUserInformationSkeleton from "..//header/HeaderUserInformationSkeleton";
+import { HeaderAddressSelectButton } from "./HeaderAddressSelectButton";
+import { HeaderCartButton } from "./HeaderCartButton";
+import { HeaderUserProfileIcon } from "./HeaderUserProfileIcon";
+import HeaderUserInformationSkeleton from "./HeaderUserInformationSkeleton";
 
 type UserToolbarProps = {
   openSidebar: () => void;
