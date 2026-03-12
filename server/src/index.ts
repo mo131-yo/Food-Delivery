@@ -14,8 +14,8 @@ const app: Application = express();
 app.use(express.json());
 
 const allowedOrigins = [
-  "https://food-6q1c.onrender.com",
-  "https://food-delta-six.vercel.app/",
+  "https://food-delivery-s682.onrender.com",
+  "https://food-delivery-iota-five.vercel.app/",
   "http://localhost:3000",   
   "http://localhost:8000"  
 ];
