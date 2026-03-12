@@ -1,0 +1,131 @@
+"use client";
+import { Button } from "@/components/ui/button";
+import { Plus, X, Minus } from "lucide-react";
+import Image from "next/image";
+import { Food } from "@/types";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "../ui/dialog";
+import { useContext, useState } from "react";
+import { CartContext } from "@/app/(main)/context";
+import { formatMoney } from "@/lib";
+
+type FoodDetailModalProps = {
+  food: Food;
+  isModalOpen: boolean;
+  onToggleModal: () => void;
+};
+
+export const FoodDetailModal = ({
+  food,
+  isModalOpen,
+  onToggleModal,
+}: FoodDetailModalProps) => {
+  const { addItem } = useContext(CartContext);
+  const [quantity, setQuantity] = useState<number>(1);
+  const { foodName, foodImage, ingredients, foodPrice } = food;
+
+  const addQuantity = () => {
+    setQuantity((prev) => prev + 1);
+  };
+
+  const totalPrice = (foodPrice || 0) * quantity;
+
+  const displayIngredients = Array.isArray(ingredients) 
+    ? ingredients.join(", ") 
+    : ingredients;
+
+  const subtractQuantity = () => {
+    setQuantity((prev) => (prev > 1 ? prev - 1 : prev));
+  };
+
+  const handleAddToCart = () => {
+    addItem({ food, quantity }, quantity);
+    setQuantity(1);
+    onToggleModal();
+  };
+  const validSrc = (foodImage && typeof foodImage === 'string' && foodImage.trim() !== "") 
+  ? foodImage 
+  : "/cake.png";
+
+  return (
+    <Dialog open={isModalOpen} onOpenChange={onToggleModal}>
+      <DialogContent className="bg-white flex flex-col max-w-[826px] max-h-[412px] sm:rounded-3xl">
+        <div className="flex w-full h-full gap-6 rounded-3xl">
+          <div className="w-1/2 overflow-hidden rounded-xl relative h-full min-h-[300px]"> 
+              <Image 
+                src={validSrc}
+                alt={foodName || "food image"} 
+                fill 
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw" 
+                priority={true}
+              />
+            </div>
+          <div className="flex flex-col w-1/2 ">
+            <div className="flex justify-end">
+              <Button
+                className="bg-white h-9 w-9  hover:bg-secondary !rounded-full"
+                onClick={onToggleModal}
+              >
+                <X className="text-black" />
+              </Button>
+            </div>
+            
+            <div className="flex flex-col justify-between h-full">
+              <DialogHeader>
+                <DialogTitle className="text-3xl font-semibold text-red-500">
+                  {foodName}
+                </DialogTitle>
+                <DialogDescription className="text-base font-normal text-[#09090B]">
+                  {displayIngredients}
+                </DialogDescription>
+              </DialogHeader>
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <p className="flex flex-col text-base font-normal text-[#09090B]">
+                    Total price:
+                  </p>
+                  <div className="text-lg font-semibold text-[#09090B]">
+                    {/* <p>${foodPrice}</p> */}
+                    <p>{formatMoney(totalPrice)} ₮</p>
+                  </div>
+                </div>
+                <div className="flex w-[121px] justify-around">
+                  <Button
+                    onClick={subtractQuantity}
+                    className="bg-white rounded-full w-9 h-9"
+                    variant="outline"
+                  >
+                    <Minus className="text-black" />
+                  </Button>
+                  <p className="flex items-center font-bold">{quantity}</p>
+                  <Button
+                    onClick={addQuantity}
+                    className="bg-white border-current rounded-full w-9 h-9"
+                    variant="outline"
+                  >
+                    <Plus className="text-black" />
+                  </Button>
+                </div>
+              </div>
+            </div>
+            <DialogFooter>
+              <Button
+                className="bg-black font-medium text-sm px-4 py-2 h-11 w-[377px] rounded-full"
+                onClick={handleAddToCart}
+              >
+                Add to cart
+              </Button>
+            </DialogFooter>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+};

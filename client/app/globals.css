@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+@plugin "tailwindcss-animate";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+
+:root {
+  --jelly-duration: 0.9s; 
+  --stagger: 0.035s;
+  --easing: cubic-bezier(0.25, 1, 0.5, 1); 
+  --base-wght: 700; 
+  --base-wdth: 85; 
+}
+
+.jelly-hero {
+  cursor: pointer;
+  line-height: 100%;
+  display: inline-flex;
+}
+
+.jelly-letter {
+  display: inline-block;
+  position: relative;
+  color: var(--c);
+  font-variation-settings: "wght" var(--base-wght), "wdth" var(--base-wdth);
+  transition: color 0.3s;
+  text-shadow: 
+    -0.005em -0.005em 0 oklch(100% 0 0 / 0.4),
+    0.005em 0.01em 0 oklch(from var(--cs) l c h / 0.3), 
+    0.01em 0.03em 0 oklch(from var(--cs) l c h / 0.3);
+}
+
+.jelly-hero.force-jelly .jelly-letter,
+.jelly-letter.is-jiggling {
+  animation: jelly var(--jelly-duration) var(--easing) forwards;
+}
+
+.jelly-hero.force-jelly .jelly-letter {
+  animation-delay: calc(var(--i) * var(--stagger));
+}
+
+@keyframes jelly {
+  0%, 100% { transform: scale(1, 1) translateY(0); font-variation-settings: "wght" 700, "wdth" 85; }
+  12% { transform: scale(1.35, 0.65) translateY(12%); font-variation-settings: "wght" 900, "wdth" 80; }
+  28% { transform: scale(0.75, 1.35) translateY(-22%); font-variation-settings: "wght" 450, "wdth" 90; }
+  45% { transform: scale(1.15, 0.85) translateY(6%); font-variation-settings: "wght" 800, "wdth" 110; }
+}
