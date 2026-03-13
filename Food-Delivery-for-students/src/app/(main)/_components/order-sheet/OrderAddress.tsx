@@ -39,7 +39,7 @@ export const OrderAddress = () => {
       const locationData = JSON.stringify({
         lat: coords.lat,
         lng: coords.lng,
-        label: "Map deer oruulna uu."
+        label: "Location saved"
       });
       
       await updateCurrentUser({ 

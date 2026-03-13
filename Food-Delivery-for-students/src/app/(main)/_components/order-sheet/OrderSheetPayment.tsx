@@ -33,7 +33,7 @@ const handleCreateOrder = async () => {
     }
 
     if (!user.address || user.address === "Address todorhoigui") {
-      toast.error("Haygaa oruul, 'Deliver here' tuvchiig darj hadgal");
+      toast.error("Haygaa oruulna uu, Haragdahgui bol scrolldoj 'Deliver here' tuvchiig darj hadgal");
       return;
     }
 
