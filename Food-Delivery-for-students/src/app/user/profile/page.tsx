@@ -66,7 +66,7 @@ export default function ProfilePage() {
                   <div>
                     <p className="text-[10px] text-gray-400 uppercase tracking-wider">Status</p>
                     <p className="text-gray-800">
-                      {user?.role === "Admin" ? "Admin" : "Idevhtei hereglegch"}
+                      {user?.role === "ADMIN" ? "ADMIN" : "Idevhtei hereglegch"}
                     </p>
                   </div>
                 </div>

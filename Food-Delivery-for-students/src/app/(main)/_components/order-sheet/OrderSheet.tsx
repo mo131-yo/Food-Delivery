@@ -25,8 +25,7 @@ export const OrderSheet = ({
         <div className="p-6 pb-2">
           <SheetHeader>
             <SheetTitle className="flex items-center gap-3 text-white">
-              <ShoppingCart size={24} />
-              Order detail
+              <ShoppingCart size={24} />Order detail
             </SheetTitle>
           </SheetHeader>
         </div>

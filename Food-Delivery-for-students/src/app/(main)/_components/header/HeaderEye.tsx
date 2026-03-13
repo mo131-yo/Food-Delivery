@@ -27,7 +27,6 @@ const EyePanelGrid = () => {
         const newX = cx + Math.cos(angle) * moveDistance;
         const newY = cy + Math.sin(angle) * moveDistance;
 
-        // Pupil update
         const pupil = eye.querySelector(".pupil") as SVGElement;
         if (pupil) {
           if (pupil.tagName === "ellipse" || pupil.tagName === "circle") {
@@ -41,7 +40,6 @@ const EyePanelGrid = () => {
           }
         }
 
-        // Highlight update
         const highlight = eye.querySelector(".highlight") as SVGElement;
         if (highlight) {
           const baseCx = parseFloat(highlight.getAttribute("data-base-cx") || highlight.getAttribute("cx") || "0");
@@ -71,7 +69,6 @@ const EyePanelGrid = () => {
         ref={containerRef}
         className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-0 overflow-hidden rounded-2xl"
       >
-        {/* Panel 1: Green */}
         <div className="relative w-[200px] h-[150px] bg-[#6db85a] overflow-hidden">
           <svg viewBox="0 0 200 150">
             <path d="M 40 30 Q 60 20 80 30" stroke="#000" strokeWidth="4" fill="none" strokeLinecap="round" />
@@ -85,7 +82,6 @@ const EyePanelGrid = () => {
   );
 };
 
-// --- Helper Components ---
 
 const EyeGroup = ({ cx, cy, r, isCircle = false }: { cx: number; cy: number; r: number; isCircle?: boolean }) => (
   <g className="eye-group" data-cx={cx} data-cy={cy} data-r={r}>

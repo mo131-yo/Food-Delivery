@@ -151,7 +151,7 @@ export const HeaderAddressSelectButton = () => {
           <div className="space-y-2">
             <p className="text-sm text-slate-700 font-semibold">Delrengui Address</p>
             <Textarea
-              placeholder="Байр, орц, тоот гэх мэт..."
+              placeholder="Duureg, horoo, bair, toot geh met ..."
               className="min-h-20 resize-none bg-slate-50 border-slate-200 focus:bg-white"    
               value={userLocationText}
               onChange={(e) => setUserLocationText(e.target.value)}
@@ -166,9 +166,8 @@ export const HeaderAddressSelectButton = () => {
           <Button 
             onClick={handleUserAddressUpdate} 
             disabled={!coords}
-            className="bg-[#EF4444] hover:bg-[#D93636] text-white rounded-full px-8 font-semibold transition-all active:scale-95"
->
-            Хадгалах
+            className="bg-[#EF4444] hover:bg-[#D93636] text-white rounded-full px-8 font-semibold transition-all active:scale-95">
+            Save
           </Button>
         </DialogFooter>
       </DialogContent>

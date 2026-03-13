@@ -78,11 +78,11 @@ export default function LocationPicker({ onLocationSelect, initialPos }: Locatio
   const defaultPos: [number, number] = initialPos || [47.9188, 106.9176];
 
   return (
-    <div className="relative w-full h-[350px] rounded-xl overflow-hidden border-2 border-slate-200 shadow-lg">
+    <div className="relative w-full h-[300px] rounded-xl overflow-hidden border-2 border-slate-200 shadow-lg">
       
-      <MapContainer 
-        center={defaultPos} 
-        zoom={16} 
+      <MapContainer
+        center={defaultPos}
+        zoom={16}
         style={{ height: '100%', width: '100%' }}
         zoomControl={false}
       >

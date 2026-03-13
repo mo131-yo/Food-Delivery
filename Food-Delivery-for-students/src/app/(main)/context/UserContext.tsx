@@ -12,7 +12,6 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { toast } from "sonner";
 
 
 type UserContextType = {
@@ -59,24 +58,33 @@ const login = async (email: any, password: any) => {
   
 useEffect(() => {
   const loadUser = async () => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token") || localStorage.getItem("accessToken")
     if (!token) {
+      setUser(null);
       setLoading(false);
       return;
     }
     try {
       const data = await getCurrentUser(token);
-      setUser(data?.user);
+      const userData = data?.user || data;
 
-      if (data?.user?.role === "ADMIN") {
+      if(userData){
+        setUser(userData);
+      }
+
+      if (userData?.role === "ADMIN") {
           const path = window.location.pathname;
-          if (path === "/" || path.startsWith("/(main)")) {
+          if (path === "/" || path === ("/login")) {
             push("/food-menu");
           }
+        }
+        else{
+          setUser(null);
         }
       } catch (error) {
         console.error("Load User Error:", error);
         localStorage.removeItem("token");
+        localStorage.removeItem("accessToken");
       } finally {
         setLoading(false);
       }
@@ -86,7 +94,7 @@ useEffect(() => {
 
   return (
     <UserContext.Provider value={{ user, login, setUser, loading, logout }}>
-      {children}
+      {!loading && children}
     </UserContext.Provider>
   );
 };
