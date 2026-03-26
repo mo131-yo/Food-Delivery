@@ -14,7 +14,6 @@
 import mongoose from "mongoose";
 
 const connectToMongoDB = async () => {
-    // Хувьсагчийн нэрийг .env файлтайгаа яг ижил болгох (z-гүй)
     const mongoUri = process.env.MONGODB_CONNECTION_STRING;
 
     if (!mongoUri) {
