@@ -20,7 +20,6 @@ const allowedOrigins = [
   "http://localhost:8000"  
 ];
 
-
 app.use(cors({
   origin: allowedOrigins,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
